@@ -4,4 +4,11 @@ Get ArgoCD password (Windows):
 
 Port Forward:
     kubectl port-forward svc/argocd-server -n argocd 8080:443
-    
+
+Expose service:
+    minikube service flask-app-service -n dev --url
+
+
+cd app
+docker build -t sharanalwars/flask:latest .
+docker push sharanalwars/flask:latest
