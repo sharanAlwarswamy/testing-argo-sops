@@ -6,6 +6,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     name = os.getenv("NAME", "DefaultName")
+    print("Hitting / - route")
     print(name)
     return render_template("index.html", name=name)
 
