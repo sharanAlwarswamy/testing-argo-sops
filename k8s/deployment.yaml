@@ -3,9 +3,6 @@ kind: Deployment
 metadata:
   name: flask-app
   namespace: dev
-  annotations:
-    argocd-image-updater.argoproj.io/image-list: sharanalwars/flask
-    argocd-image-updater.argoproj.io/sharanalwars/flask.tag: semver
 spec:
   replicas: 1
   selector:
@@ -21,10 +18,3 @@ spec:
         image: sharanalwars/flask:latest
         ports:
         - containerPort: 5000
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "250m"
-          limits:
-            memory: "256Mi"
-            cpu: "500m"
