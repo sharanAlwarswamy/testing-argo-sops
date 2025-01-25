@@ -1,8 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-app-deploy
+  name: flask-app
   namespace: dev
+  annotations:
+    # Tells Image Updater to watch this repository
+    argocd-image-updater.argoproj.io/image-list: "sharanalwars/flask"
+    # Semantic versioning for updating the tag
+    argocd-image-updater.argoproj.io/sharanalwars/flask.tag: "semver"
 spec:
   replicas: 1
   selector:
@@ -15,16 +20,6 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: sharanalwars/flask:latest
+        image: "sharanalwars/flask:latest"
         ports:
         - containerPort: 5000
-        envFrom:
-        - configMapRef:
-            name: flask-app-config  # Reference to your ConfigMap
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "250m"
-          limits:
-            memory: "256Mi"
-            cpu: "500m"
