@@ -1,0 +1,7 @@
+Get ArgoCD password (Windows):
+    $encodedPassword = kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}"
+    [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($encodedPassword))
+
+Port Forward:
+    kubectl port-forward svc/argocd-server -n argocd 8080:443
+    
