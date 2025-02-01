@@ -20,7 +20,7 @@ spec:
         - containerPort: 5000
         envFrom:
         - configMapRef:
-            name: flask-app-config  # Reference to your ConfigMap
+            name: flask-app-config
         resources:
           requests:
             memory: "128Mi"
@@ -28,3 +28,20 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-service
+  namespace: dev
+spec:
+  selector:
+    app: flask-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: ClusterIP
+
+---
